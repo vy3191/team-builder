@@ -1,17 +1,22 @@
 import React from 'react';
 
 const Card = (props) => {
-  const {name, email, role} = props.element;
-  return (
-    <>
-      <p>{name}</p>
-      <p>{email}</p>
-      <p>{role}</p>
-      <div>
-        <button>Edit</button>
-        <button>Delete</button>
-      </div>
-    </>
+  return(
+    <div>
+      {
+      props.data.map( userData => 
+         (<div key={userData.name}>
+           <p>{userData.name}</p>
+          <p>{userData.email}</p>
+          <p>{userData.role}</p>
+          <div>
+            <button>Edit</button>
+            <button onClick={() =>props.deleteUser(userData)}>Delete</button>
+          </div> 
+         </div>)
+      )
+    }
+    </div>
   )
 }
 
