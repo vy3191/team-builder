@@ -7,6 +7,8 @@ console.log(Data)
 
 function App() {
   const [data, setData] = useState([]);
+  const [memberToEdit, setMemberToEdit] = useState();
+  const [show, setShow] = useState(false);
   useEffect(() => {
      const getData =async () => {
        const promiseValue = Promise.resolve(Data);
@@ -21,6 +23,12 @@ function App() {
      getData();
   },[]);
 
+  const editUser = (inputData) => {
+     setMemberToEdit(inputData);
+    //  console.log(inputData);
+     setShow(true);
+  }
+
   const addUserData = (inputData) => {
      console.log(inputData);
      setData([...data, inputData]);
@@ -31,14 +39,30 @@ function App() {
       setData(newData)
   }
 
+  const handleClose = () => {
+    setShow(false)
+  };
+
+  const handleShow = () => {
+    setShow(true)
+   };
+
   return (
     <div className="App">
       <h1>Form Management-React</h1>
       <FormElement data={data} 
                    addUserData={addUserData}
-                   deleteUser={deleteUser} />
+                   deleteUser={deleteUser}
+                   setMemberToEdit={setMemberToEdit}
+                   memberToEdit={memberToEdit}
+                   show={show}
+                   handleClose={handleClose}
+                   handleShow={handleShow}
+                   />
       <Card data={data}            
-            deleteUser={deleteUser} />      
+            deleteUser={deleteUser}
+            editUser={editUser}
+            />      
     </div>
   );
 }
